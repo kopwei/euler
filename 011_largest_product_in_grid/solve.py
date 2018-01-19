@@ -24,6 +24,8 @@ print(lines[0])
 nums = []
 for line in lines:
     nums.append([int(val) for val in line.split(' ')])
+for row in nums:
+    print(row)
 
 def get_4_straight_numbers(i, j):
     h = [nums[i][j]]
@@ -46,11 +48,29 @@ def get_4_straight_numbers(i, j):
         else:
             dd.append(0)
         if j + x < len(nums[i]) and i - x >= 0:
-            du.append(nums[j + x][i-x])
+            du.append(nums[i-x][j + x])
         else:
             du.append(0)
     return h, v, du, dd
 
+def get_list_prod(num_list):
+    prod = 1
+    for num in num_list:
+        prod *= num
+    return prod
+
+def get_max_prod(i, j):
+    h, v, du, dd = get_4_straight_numbers(i, j)
+    return max(get_list_prod(h), get_list_prod(v), get_list_prod(du), get_list_prod(dd))
+
 
 i, j = 5, 0
 print(get_4_straight_numbers(i, j))
+max_val = 0
+for i in range(len(nums)):
+    for j in range(len(nums[i])):
+        prod = get_max_prod(i, j)
+        if prod > max_val:
+            max_val = prod
+
+print("Max product is ", max_val)

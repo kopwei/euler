@@ -105,3 +105,8 @@ ENV/
 
 #binary
 solve
+
+cmake-build-debug
+CMakeLists.txt
+
+.idea
